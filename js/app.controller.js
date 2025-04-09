@@ -21,17 +21,19 @@ window.app = {
 function onInit() {
     getFilterByFromQueryParams()
     loadAndRenderLocs()
-    mapService.getUserPosition()
-        .then(UpdateUserPos)
+    // mapService.getUserPosition()
+    //     .then(UpdateUserPos)
     mapService.initMap()
-        .then(() => {
-            // onPanToTokyo()
-            mapService.addClickListener(onAddLoc)
-        })
-        .catch(err => {
-            console.error('OOPs:', err)
-            flashMsg('Cannot init map')
-        })
+    .then(() => {
+        // onPanToTokyo()
+        mapService.addClickListener(onAddLoc)
+    })
+    .then(()=> {return mapService.getUserPosition()})
+    .then(UpdateUserPos)
+    .catch(err => {
+        console.error('OOPs:', err)
+        flashMsg('Cannot init map')
+    })
 }
 
 
