@@ -49,8 +49,6 @@ function renderLocs(locs) {
     
     var strHTML = locs.map(loc => {
         const latLng = { lat: loc.geo.lat, lng: loc.geo.lng }
-        let update = (loc.updatedAt)? `Update: ${utilService.elapsedTime(loc.updatedAt)}` : ''
-        console.log(update)
         
         const className = (loc.id === selectedLocId) ? 'active' : ''
         return `
