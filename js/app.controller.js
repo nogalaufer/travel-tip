@@ -155,8 +155,7 @@ function onPanToUserPos() {
             unDisplayLoc()
             loadAndRenderLocs()
             flashMsg(`You are at Latitude: ${latLng.lat} Longitude: ${latLng.lng}`)
-            renderLocs(latLng)
-
+            
         })
         .catch(err => {
             console.error('OOPs:', err)
