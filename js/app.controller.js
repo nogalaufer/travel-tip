@@ -44,12 +44,14 @@ function UpdateUserPos(mylatLng) {
 
 function renderLocs(locs) {
     const selectedLocId = getLocIdFromQueryParams()
-
-
-
+    
+    
+    
     var strHTML = locs.map(loc => {
         const latLng = { lat: loc.geo.lat, lng: loc.geo.lng }
-
+        let update = (loc.updatedAt)? `Update: ${utilService.elapsedTime(loc.updatedAt)}` : ''
+        console.log(update)
+        
         const className = (loc.id === selectedLocId) ? 'active' : ''
         return `
         <li class="loc ${className}" data-id="${loc.id}">
@@ -59,10 +61,9 @@ function renderLocs(locs) {
                 <span title="${loc.rate} stars">${'★'.repeat(loc.rate)}</span>
             </h4>
             <p class="muted">
-                Created: ${utilService.elapsedTime(loc.createdAt)}  | Update: ${utilService.elapsedTime(loc.updatedAt)}
+                Created: ${utilService.elapsedTime(loc.createdAt)}  
                 ${(loc.createdAt !== loc.updatedAt) ?
-                ` | Updated: ${utilService.elapsedTime(loc.updatedAt)}`
-                : ''}
+                ` | Updated: ${utilService.elapsedTime(loc.updatedAt)}`: ''}
             </p>
             <div class="loc-btns">     
                <button title="Delete" onclick="app.onRemoveLoc('${loc.id}')">🗑️</button>
