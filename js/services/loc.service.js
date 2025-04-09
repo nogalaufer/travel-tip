@@ -36,7 +36,6 @@ export const locService = {
 function query() {
     return storageService.query(DB_KEY)
         .then(locs => {
-            console.log(locs)
             if (gFilterBy.txt) {
                 const regex = new RegExp(gFilterBy.txt, 'i')
                 locs = locs.filter(loc => regex.test(loc.name) || regex.test(loc.geo.address))
