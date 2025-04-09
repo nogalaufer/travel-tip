@@ -87,12 +87,20 @@ function onSearchAddress(ev) {
     const el = document.querySelector('[name=address]')
     mapService.lookupAddressGeo(el.value)
         .then(geo => {
-            mapService.panTo(geo)
+            mapService.panTo(geo, geo.zoom = 12)
+
+            const tempLoc = {
+                name: el.value,
+                geo: geo
+            }
+            mapService.setMarker(tempLoc)
+            flashMsg(`Found location: ${geo.address || el.value}`)
         })
         .catch(err => {
             console.error('OOPs:', err)
             flashMsg('Cannot lookup address')
         })
+
 }
 
 function onAddLoc(geo) {
